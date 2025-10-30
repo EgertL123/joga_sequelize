@@ -24,6 +24,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const articleRouter = require('./routers/article');
 app.use('/', articleRouter);
 app.use('/article', articleRouter);
+app.use('/admin/article', articleRouter)
 
 const authorsRouter = require('./routers/authors');
 app.use('/', authorsRouter)
