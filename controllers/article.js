@@ -23,9 +23,18 @@ const getArticleBySlug = (req, res) => {
         where: {
             slug: req.params.slug
         },
-        include: [{
-            model: models.Authors
-        }],
+        include: [
+            {
+                model: models.Authors,
+            },
+            {
+                model: models.Tag,
+                through: {
+                    model: models.ArticleTag
+                }
+            }
+        ],
+
     })
     .then(article => {
         console.log(article);
