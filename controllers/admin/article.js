@@ -39,7 +39,24 @@ const updateArticle = async (req, res) => {
     }
 };
 
+const deleteArticle = async (req, res) => {
+    try {
+        const articleId = req.params.id;
+        const deletedCount = await models.Article.destroy({ where: { id: articleId } });
+
+        if (!deletedCount) {
+            return res.status(404).json({ message: 'Article not found' });
+        }
+
+        return res.redirect('/admin');
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
 module.exports = {
     createArticle,
     updateArticle,
+    deleteArticle
 }
