@@ -25,6 +25,21 @@ const createArticle = (req, res) => {
         })
 }
 
+const updateArticle = async (req, res) => {
+    try {
+        const articleId = req.params.id;
+        const articleData = req.body;
+
+        await models.Article.update(articleData, { where: { id: articleId } });
+
+        res.redirect('/admin');
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 module.exports = {
-    createArticle
+    createArticle,
+    updateArticle,
 }
